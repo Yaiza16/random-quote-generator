@@ -3,6 +3,7 @@ import Quote from './Quote'
 import Spinner from './Spinner'
 
 function SingleQuote({quote, loading}) {
+    console.log('SingleQuote runs')
     return (
         <div>
             {

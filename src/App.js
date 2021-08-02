@@ -11,7 +11,7 @@ const initialQuote = {
   id: "29sgds257298"
 }
 
-const initialAllQuotesAuthor = [
+const initialAllAuthorQuotes = [
   {
       author: "Johnny Depp",
       genre: "Action",
@@ -30,7 +30,7 @@ const initialAllQuotesAuthor = [
 function App() {
   const [quote, setQuote] = useState(initialQuote);
   const [loading, setLoading] = useState(true) //Control when a request is loading
-  const [allQuotesAuthor, setAllQuotesAuthor] = useState(initialAllQuotesAuthor)
+  const [allAuthorQuotes, setAllAuthorQuotes] = useState(initialAllAuthorQuotes)
 
 
   // Update random quote once after the initial rendering
@@ -47,11 +47,11 @@ function App() {
             })
   }
 
-
+  // Receive all author quotes request
   const updateAllAuthorQuotes = () =>{
     getAllAuthorQuotes(quote.author, setLoading)
                     .then((data) =>{
-                      setAllQuotesAuthor(data)
+                      setAllAuthorQuotes(data)
                       console.log(data)
                     })
   }
@@ -62,6 +62,11 @@ function App() {
       <SingleQuote quote={quote} loading={loading}/>
       <button onClick={() => updateRandomQuote()}>Generate another random quote</button>
       <button onClick={() => updateAllAuthorQuotes()}>Show all quotes by {quote.author}</button>
+      {
+        allAuthorQuotes.map(quote => (
+          <div key={quote.id}>{quote.text}</div>
+        ))
+      }
       
       
     </div>
