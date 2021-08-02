@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import randomQuote from './helpers/randomQuote';
 import './App.css';
+import Spinner from './components/Spinner';
 
 const initialQuote = {
   author: "Johnny Depp",
@@ -12,6 +13,7 @@ const initialQuote = {
 
 function App() {
   const [quote, setQuote] = useState(initialQuote);
+  const [loading, setLoading] = useState(true)
 
   // Update random quote once after the initial rendering
   useEffect(() =>{
@@ -21,7 +23,7 @@ function App() {
 
   // Receive random quote request
   const updateRandomQuote = () =>{
-    randomQuote()
+    randomQuote(setLoading)
             .then((data) =>{
               setQuote(data)
             })
@@ -30,8 +32,12 @@ function App() {
   return (
     <div className="App">
       <h1>Random Quote Generator</h1>
-      <p>{quote.text}</p>
-      <p>{quote.author}</p>
+      {loading
+              ? <Spinner />
+              :<p>{quote.text}</p>
+      }
+      
+      
       
     </div>
   );
