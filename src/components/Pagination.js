@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function Pagination({pagination}) {
+export default function Pagination({pagination, setPageNumber}) {
     console.log('Render pagination component')
     const pageNumbers = []
 
@@ -8,8 +8,8 @@ export default function Pagination({pagination}) {
         for(let i = 1; i <= pagination.totalPages; i++){
             pageNumbers.push(i)
         }
-        console.log('PageNumbers: ' + pageNumbers)
-        console.log(pageNumbers)
+        // console.log('PageNumbers: ' + pageNumbers)
+        // console.log(pageNumbers)
     }
     return (
         <div>
@@ -17,7 +17,7 @@ export default function Pagination({pagination}) {
                 pageNumbers.length>0 && 
                 <ul className="pagination">
                 {pageNumbers.map(number => (
-                    <li key={number}><a href="!#">{number}</a></li>
+                    <li key={number}><a onClick={() => setPageNumber(number)} href="!#">{number}</a></li>
                 ))}
             </ul>
 

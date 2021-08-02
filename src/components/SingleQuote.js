@@ -3,7 +3,7 @@ import Quote from './Quote'
 import Spinner from './Spinner'
 
 function SingleQuote({quote, loading, randomQuotePageFocus, updateRandomQuote, updateAllAuthorQuotes}) {
-    console.log('SingleQuote runs')
+    // console.log('SingleQuote runs')
     return (
         <div>
             {

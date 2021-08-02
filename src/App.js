@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useCallback} from 'react';
 import getRandomQuote from './helpers/getRandomQuote';
 import './App.css';
 import SingleQuote from './components/SingleQuote';
@@ -40,6 +40,7 @@ function App() {
   const [allAuthorQuotes, setAllAuthorQuotes] = useState(initialAllAuthorQuotes)
   const [randomQuotePageFocus, setRandomQuotePageFocus] = useState(true) // Control when we change from randomQuotePage to allAuthorQuotesPage
   const [pagination, setPagination] = useState(initialPagination)
+  const [pageNumber, setPageNumber] = useState(1)
 
   // Update random quote once after the initial rendering
   useEffect(() =>{
@@ -47,8 +48,13 @@ function App() {
   },[]) 
 
 
+// useEffect(() =>{
+//   updateAllAuthorQuotes(pageNumber)
+// }, [pageNumber])
+
   // Receive random quote request
   const updateRandomQuote = () =>{
+    setPageNumber(1)
     setRandomQuotePageFocus(true)
     getRandomQuote(setLoading)
             .then((data) =>{
@@ -57,16 +63,28 @@ function App() {
   }
 
   // Receive all author quotes request
-  const updateAllAuthorQuotes = () =>{
+  const updateAllAuthorQuotes = useCallback((pageNumber) =>{
     setRandomQuotePageFocus(false)
-    getAllAuthorQuotes(quote.author, setLoading)
+    getAllAuthorQuotes(quote.author, setLoading, pageNumber)
                     .then((data) =>{
                       const newArray = data.data
                       setPagination(data.pagination)
                       setAllAuthorQuotes(() => generateNewAllAuthorQuotesArray(newArray))
                     })
-  }
-  console.log(pagination)
+  }, [quote.author])
+
+
+  
+  // const changePageNumber = number =>{
+  //   setPageNumber(number)
+  //   updateAllAuthorQuotes(pageNumber)
+  // }
+
+  // Move to another page
+  // const updateCurrentlyPageNumber = number =>{
+  //   setPageNumber(number)
+  //   updateAllAuthorQuotes(pageNumber)
+  // }
 
 
   // Generate new array with the author quotes and the right property's name
@@ -89,7 +107,7 @@ function App() {
       {
         randomQuotePageFocus
                 ? <SingleQuote quote={quote} loading={loading} randomQuotePageFocus={randomQuotePageFocus} updateRandomQuote={updateRandomQuote} updateAllAuthorQuotes={updateAllAuthorQuotes}/>
-                : <AllAuthorQuotes allAuthorQuotes={allAuthorQuotes} loading={loading} setRandomQuotePageFocus={setRandomQuotePageFocus} pagination={pagination}/>    
+                : <AllAuthorQuotes allAuthorQuotes={allAuthorQuotes} loading={loading} setRandomQuotePageFocus={setRandomQuotePageFocus} pagination={pagination} setPageNumber={setPageNumber} pageNumber={pageNumber} updateAllAuthorQuotes={updateAllAuthorQuotes}/>    
       }
 
       {/* <button onClick={() => updateRandomQuote()}>Generate another random quote</button> */}
