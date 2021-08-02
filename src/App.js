@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import randomQuote from './helpers/randomQuote';
 import './App.css';
 import Spinner from './components/Spinner';
+import SingleQuote from './components/SingleQuote';
 
 const initialQuote = {
   author: "Johnny Depp",
@@ -34,7 +35,7 @@ function App() {
       <h1>Random Quote Generator</h1>
       {loading
               ? <Spinner />
-              :<p>{quote.text}</p>
+              : <SingleQuote quote={quote} />
       }
      <button onClick={() => updateRandomQuote()}>Generate another random quote</button>
       
