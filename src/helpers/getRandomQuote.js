@@ -1,4 +1,4 @@
-const randomQuote = async (setLoading) =>{
+const getRandomQuote = async (setLoading) =>{
     // Set loader
     setLoading(true)
     const url = 'https://quote-garden.herokuapp.com/api/v3/quotes/random'
@@ -20,4 +20,4 @@ const randomQuote = async (setLoading) =>{
     return singleQuote
 }
 
-export default randomQuote;
+export default getRandomQuote;
