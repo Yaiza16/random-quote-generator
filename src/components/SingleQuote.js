@@ -1,10 +1,15 @@
 import React from 'react'
 import Quote from './Quote'
+import Spinner from './Spinner'
 
-function SingleQuote({quote}) {
+function SingleQuote({quote, loading}) {
     return (
         <div>
-            <Quote key={quote.id} quote={quote} />
+            {
+                loading
+                    ? <Spinner />
+                    :<Quote key={quote.id} quote={quote} />
+            }
         </div>
     )
 }

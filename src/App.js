@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import randomQuote from './helpers/randomQuote';
 import './App.css';
-import Spinner from './components/Spinner';
 import SingleQuote from './components/SingleQuote';
 
 const initialQuote = {
@@ -14,7 +13,8 @@ const initialQuote = {
 
 function App() {
   const [quote, setQuote] = useState(initialQuote);
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(true) //Control when a request is loading
+
 
   // Update random quote once after the initial rendering
   useEffect(() =>{
@@ -33,10 +33,7 @@ function App() {
   return (
     <div className="App">
       <h1>Random Quote Generator</h1>
-      {loading
-              ? <Spinner />
-              : <SingleQuote quote={quote} />
-      }
+      <SingleQuote quote={quote} loading={loading}/>
      <button onClick={() => updateRandomQuote()}>Generate another random quote</button>
       
       
