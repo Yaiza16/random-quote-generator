@@ -3,6 +3,7 @@ import getRandomQuote from './helpers/getRandomQuote';
 import './App.css';
 import SingleQuote from './components/SingleQuote';
 import getAllAuthorQuotes from './helpers/getAllAuthorQuotes';
+import AllAuthorQuotes from './components/AllAuthorQuotes';
 
 const initialQuote = {
   author: "Johnny Depp",
@@ -31,6 +32,7 @@ function App() {
   const [quote, setQuote] = useState(initialQuote);
   const [loading, setLoading] = useState(true) //Control when a request is loading
   const [allAuthorQuotes, setAllAuthorQuotes] = useState(initialAllAuthorQuotes)
+  const [randomQuotePageFocus, setRandomQuotePageFocus] = useState(true)
 
 
   // Update random quote once after the initial rendering
@@ -41,6 +43,7 @@ function App() {
 
   // Receive random quote request
   const updateRandomQuote = () =>{
+    setRandomQuotePageFocus(true)
     getRandomQuote(setLoading)
             .then((data) =>{
               setQuote(data)
@@ -49,6 +52,7 @@ function App() {
 
   // Receive all author quotes request
   const updateAllAuthorQuotes = () =>{
+    setRandomQuotePageFocus(false)
     getAllAuthorQuotes(quote.author, setLoading)
                     .then((data) =>{
                       setAllAuthorQuotes(data)
@@ -59,15 +63,15 @@ function App() {
   return (
     <div className="App">
       <h1>Random Quote Generator</h1>
-      <SingleQuote quote={quote} loading={loading}/>
+      {
+        randomQuotePageFocus
+                ? <SingleQuote quote={quote} loading={loading} randomQuotePageFocus={randomQuotePageFocus}/>
+                : <AllAuthorQuotes allAuthorQuotes={allAuthorQuotes} randomQuotePageFocus={randomQuotePageFocus}/>    
+
+      }
+
       <button onClick={() => updateRandomQuote()}>Generate another random quote</button>
       <button onClick={() => updateAllAuthorQuotes()}>Show all quotes by {quote.author}</button>
-      {
-        allAuthorQuotes.map(quote => (
-          <div key={quote.id}>{quote.text}</div>
-        ))
-      }
-      
       
     </div>
   );
