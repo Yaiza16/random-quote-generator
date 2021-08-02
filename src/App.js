@@ -1,4 +1,5 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
+import randomQuote from './helpers/randomQuote';
 import './App.css';
 
 const initialQuote = {
@@ -10,7 +11,21 @@ const initialQuote = {
 
 
 function App() {
-  const [quote, setQuote] = useState(initialQuote)
+  const [quote, setQuote] = useState(initialQuote);
+
+  // Update random quote once after the initial rendering
+  useEffect(() =>{
+    updateRandomQuote()
+  },[]) 
+
+
+  // Receive random quote request
+  const updateRandomQuote = () =>{
+    randomQuote()
+            .then((data) =>{
+              setQuote(data)
+            })
+  }
 
   return (
     <div className="App">
