@@ -10,7 +10,7 @@ function AllAuthorQuotes({allAuthorQuotes, loading}) {
                 loading 
                     ? <Spinner />
                     : allAuthorQuotes.map(quote => (
-                        <Quote id={quote.id} quoteAuthor={quote}/>
+                        <Quote key={quote.id} quoteAuthor={quote}/>
                     ))
             }
         </div>

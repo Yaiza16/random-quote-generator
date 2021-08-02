@@ -55,10 +55,24 @@ function App() {
     setRandomQuotePageFocus(false)
     getAllAuthorQuotes(quote.author, setLoading)
                     .then((data) =>{
-                      setAllAuthorQuotes(data)
-                      console.log(data)
+                      const newArray = data.data
+                      setAllAuthorQuotes(() => generateNewAllAuthorQuotesArray(newArray))
                     })
   }
+
+  // Generate new array with the author quotes and the right property's name
+  function generateNewAllAuthorQuotesArray(array){
+    const newAllAuthorQuotesArray = array.map(quote =>({
+      id: quote._id,
+      author: quote.quoteAuthor,
+      genre: quote.quoteGenre,
+      text: quote.quoteText
+    }))
+
+    return newAllAuthorQuotesArray
+  }
+
+
 
   return (
     <div className="App">
