@@ -27,13 +27,19 @@ const initialAllAuthorQuotes = [
   }
 ]
 
+const initialPagination = {
+  "currentPage": 1,
+  "nextPage": null,
+  "totalPages": 1
+}
+
 
 function App() {
   const [quote, setQuote] = useState(initialQuote);
   const [loading, setLoading] = useState(true) //Control when a request is loading
   const [allAuthorQuotes, setAllAuthorQuotes] = useState(initialAllAuthorQuotes)
   const [randomQuotePageFocus, setRandomQuotePageFocus] = useState(true) // Control when we change from randomQuotePage to allAuthorQuotesPage
-
+  const [pagination, setPagination] = useState(initialPagination)
 
   // Update random quote once after the initial rendering
   useEffect(() =>{
@@ -56,9 +62,12 @@ function App() {
     getAllAuthorQuotes(quote.author, setLoading)
                     .then((data) =>{
                       const newArray = data.data
+                      setPagination(data.pagination)
                       setAllAuthorQuotes(() => generateNewAllAuthorQuotesArray(newArray))
                     })
   }
+  console.log(pagination)
+
 
   // Generate new array with the author quotes and the right property's name
   function generateNewAllAuthorQuotesArray(array){
@@ -79,12 +88,12 @@ function App() {
       <h1>Random Quote Generator</h1>
       {
         randomQuotePageFocus
-                ? <SingleQuote quote={quote} loading={loading} randomQuotePageFocus={randomQuotePageFocus}/>
-                : <AllAuthorQuotes allAuthorQuotes={allAuthorQuotes} loading={loading} randomQuotePageFocus={randomQuotePageFocus}/>    
+                ? <SingleQuote quote={quote} loading={loading} randomQuotePageFocus={randomQuotePageFocus} updateRandomQuote={updateRandomQuote} updateAllAuthorQuotes={updateAllAuthorQuotes}/>
+                : <AllAuthorQuotes allAuthorQuotes={allAuthorQuotes} loading={loading} setRandomQuotePageFocus={setRandomQuotePageFocus} pagination={pagination}/>    
       }
 
-      <button onClick={() => updateRandomQuote()}>Generate another random quote</button>
-      <button onClick={() => updateAllAuthorQuotes()}>Show all quotes by {quote.author}</button>
+      {/* <button onClick={() => updateRandomQuote()}>Generate another random quote</button> */}
+      {/* <button onClick={() => updateAllAuthorQuotes()}>Show all quotes by {quote.author}</button> */}
       
     </div>
   );
