@@ -1,14 +1,17 @@
 import React from 'react'
 import Quote from './Quote'
+import Spinner from './Spinner'
 
-function AllAuthorQuotes({allAuthorQuotes}) {
+function AllAuthorQuotes({allAuthorQuotes, loading}) {
     console.log('AllAuthorQuotes runs')
     return (
         <div>
             {
-                allAuthorQuotes.map(quote => (
-                    <Quote id={quote.id} quoteAuthor={quote}/>
-                ))
+                loading 
+                    ? <Spinner />
+                    : allAuthorQuotes.map(quote => (
+                        <Quote id={quote.id} quoteAuthor={quote}/>
+                    ))
             }
         </div>
     )

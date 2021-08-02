@@ -32,7 +32,7 @@ function App() {
   const [quote, setQuote] = useState(initialQuote);
   const [loading, setLoading] = useState(true) //Control when a request is loading
   const [allAuthorQuotes, setAllAuthorQuotes] = useState(initialAllAuthorQuotes)
-  const [randomQuotePageFocus, setRandomQuotePageFocus] = useState(true)
+  const [randomQuotePageFocus, setRandomQuotePageFocus] = useState(true) // Control when we change from randomQuotePage to allAuthorQuotesPage
 
 
   // Update random quote once after the initial rendering
@@ -66,8 +66,7 @@ function App() {
       {
         randomQuotePageFocus
                 ? <SingleQuote quote={quote} loading={loading} randomQuotePageFocus={randomQuotePageFocus}/>
-                : <AllAuthorQuotes allAuthorQuotes={allAuthorQuotes} randomQuotePageFocus={randomQuotePageFocus}/>    
-
+                : <AllAuthorQuotes allAuthorQuotes={allAuthorQuotes} loading={loading} randomQuotePageFocus={randomQuotePageFocus}/>    
       }
 
       <button onClick={() => updateRandomQuote()}>Generate another random quote</button>
