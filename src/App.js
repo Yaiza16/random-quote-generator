@@ -36,6 +36,7 @@ function App() {
               ? <Spinner />
               :<p>{quote.text}</p>
       }
+     <button onClick={() => updateRandomQuote()}>Generate another random quote</button>
       
       
       
