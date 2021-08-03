@@ -1,14 +1,19 @@
 import React from 'react'
+import './Quote.css'
+
 
 function Quote({quote, quoteAuthor, randomQuotePageFocus}) {
 
+    console.log(quote)
+    
+
     return (
-        <div>
-            <p>{randomQuotePageFocus 
+        <div className="card">
+            <p className="card-quote">{randomQuotePageFocus 
                                 ? quote.text 
                                 : quoteAuthor.text}</p>
 
-            <i>{randomQuotePageFocus 
+            <i className="card-author">{randomQuotePageFocus 
                                 ? quote.author 
                                 : quoteAuthor.author}</i>
         </div>

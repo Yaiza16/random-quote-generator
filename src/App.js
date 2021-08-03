@@ -154,8 +154,12 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Random Quote Generator</h1>
-      <input type="text" value={text} onChange={e => setText(e.target.value)}></input>
+      <header className="header">
+        <h1 className="header-title">Random Quote Generator</h1>
+        <input type="text" value={text} onChange={e => setText(e.target.value)}></input>
+      </header>
+      
+      <section className="main">
       {randomQuotePageFocus ? (
         <SingleQuote
           quote={quote}
@@ -181,6 +185,7 @@ function App() {
           setText={setText}
         />
       )}
+      </section>
 
       {/* <button onClick={() => updateRandomQuote()}>Generate another random quote</button> */}
       {/* <button onClick={() => updateAllAuthorQuotes()}>Show all quotes by {quote.author}</button> */}
