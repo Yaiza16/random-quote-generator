@@ -3,7 +3,7 @@ import Quote from './Quote'
 import Spinner from './Spinner'
 import Pagination from './Pagination'
 
-function AllAuthorQuotes({allAuthorQuotes, loading, setRandomQuotePageFocus, pagination, setPageNumber, pageNumber, updateAllAuthorQuotes}) {
+function AllAuthorQuotes({allAuthorQuotes, loading, setRandomQuotePageFocus, pagination, setPageNumber, pageNumber, updateAllAuthorQuotes, maxPageNumberLimit, minPageNumberLimit, pageNumberLimit}) {
     // console.log('AllAuthorQuotes runs')
 
     useEffect(() =>{
@@ -19,7 +19,7 @@ function AllAuthorQuotes({allAuthorQuotes, loading, setRandomQuotePageFocus, pag
                         <Quote key={quote.id} quoteAuthor={quote}/>
                     ))
             }
-            <Pagination pagination={pagination} setPageNumber={setPageNumber}/>
+            <Pagination pagination={pagination} setPageNumber={setPageNumber} maxPageNumberLimit={maxPageNumberLimit} minPageNumberLimit={minPageNumberLimit} pageNumberLimit={pageNumberLimit}/>
             <button onClick={() => setRandomQuotePageFocus(true)}>Back to the random quote generator</button>
         </div>
     )

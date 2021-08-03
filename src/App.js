@@ -42,11 +42,29 @@ function App() {
   const [pagination, setPagination] = useState(initialPagination)
   const [pageNumber, setPageNumber] = useState(1)
 
+  const [pageNumberLimit, setPageNumberLimit] = useState(5)
+  const [maxPageNumberLimit, setMaxPageNumberLimit] = useState(5)
+  const [minPageNumberLimit, setMinPageNumberLimit] = useState(1)
+
   // Update random quote once after the initial rendering
   useEffect(() =>{
     updateRandomQuote()
   },[]) 
 
+  
+  // Every time pageNumber changes, check if the new pageNumber is printed in the pagination.
+  useEffect(() =>{
+    if (pageNumber > maxPageNumberLimit){
+      setMaxPageNumberLimit(maxPageNumberLimit + pageNumberLimit)
+      setMinPageNumberLimit(minPageNumberLimit + pageNumberLimit)
+    }
+
+    if (pageNumber < minPageNumberLimit){
+      setMaxPageNumberLimit(maxPageNumberLimit - pageNumberLimit)
+      setMinPageNumberLimit(minPageNumberLimit - pageNumberLimit)
+    }
+
+  }, [pageNumber, maxPageNumberLimit, minPageNumberLimit, pageNumberLimit])
 
 // useEffect(() =>{
 //   updateAllAuthorQuotes(pageNumber)
@@ -107,7 +125,7 @@ function App() {
       {
         randomQuotePageFocus
                 ? <SingleQuote quote={quote} loading={loading} randomQuotePageFocus={randomQuotePageFocus} updateRandomQuote={updateRandomQuote} updateAllAuthorQuotes={updateAllAuthorQuotes}/>
-                : <AllAuthorQuotes allAuthorQuotes={allAuthorQuotes} loading={loading} setRandomQuotePageFocus={setRandomQuotePageFocus} pagination={pagination} setPageNumber={setPageNumber} pageNumber={pageNumber} updateAllAuthorQuotes={updateAllAuthorQuotes}/>    
+                : <AllAuthorQuotes allAuthorQuotes={allAuthorQuotes} loading={loading} setRandomQuotePageFocus={setRandomQuotePageFocus} pagination={pagination} setPageNumber={setPageNumber} pageNumber={pageNumber} updateAllAuthorQuotes={updateAllAuthorQuotes} maxPageNumberLimit={maxPageNumberLimit} minPageNumberLimit={minPageNumberLimit} pageNumberLimit={pageNumberLimit}/>    
       }
 
       {/* <button onClick={() => updateRandomQuote()}>Generate another random quote</button> */}
