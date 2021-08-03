@@ -14,7 +14,7 @@ export default function Pagination({pagination, setPageNumber, maxPageNumberLimi
         }
     }
 
-    const targetPageNumbers = pageNumbers.filter(pageNumber => pageNumber <= maxPageNumberLimit && pageNumber >= minPageNumberLimit)
+    const pageNumbersShowed = pageNumbers.filter(pageNumber => pageNumber <= maxPageNumberLimit && pageNumber >= minPageNumberLimit)
 
     // console.log(pageNumbers)
     // console.log(pagination)
@@ -37,7 +37,7 @@ export default function Pagination({pagination, setPageNumber, maxPageNumberLimi
                         {pagination.currentPage > 1 &&<button onClick={() => setPageNumber(pagination.currentPage -1)}>Previous</button>}
                         {minPageNumberLimit !== 1 && <button onClick={() => setPageNumber(minPageNumberLimit -1)}> &hellip; </button>}  
 
-                        {targetPageNumbers.map(number => (
+                        {pageNumbersShowed.map(number => (
                             <li key={number}><a onClick={() => setPageNumber(number)} href="!#">{number}</a></li>
                         ))}
 
