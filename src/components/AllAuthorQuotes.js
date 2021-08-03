@@ -3,10 +3,10 @@ import Quote from './Quote'
 import Spinner from './Spinner'
 import Pagination from './Pagination'
 
-function AllAuthorQuotes({allAuthorQuotes, loading, setRandomQuotePageFocus, pagination, setPageNumber, pageNumber, updateAllAuthorQuotes, maxPageNumberLimit, minPageNumberLimit, pageNumberLimit}) {
+function AllAuthorQuotes({allAuthorQuotes, loading, setRandomQuotePageFocus, pagination, setPageNumber, pageNumber, updateAllAuthorQuotes, maxPageNumberLimit, minPageNumberLimit, pageNumberLimit, querySearchPageFocus, allQuerySearchQuotes, setText}) {
     
     useEffect(() =>{
-        console.log('AllAuthorQuotes render')
+        console.log('varUsed')
     }, [])
 
 
@@ -14,17 +14,24 @@ function AllAuthorQuotes({allAuthorQuotes, loading, setRandomQuotePageFocus, pag
         updateAllAuthorQuotes(pageNumber)
     },[pageNumber, updateAllAuthorQuotes])
 
+    let varUsed;
+    querySearchPageFocus
+                    ? varUsed = allQuerySearchQuotes
+                    : varUsed= allAuthorQuotes
+
     return (
         <div>
             {
                 loading 
                     ? <Spinner />
-                    : allAuthorQuotes.map(quote => (
-                        <Quote key={quote.id} quoteAuthor={quote}/>
+                    :   varUsed.map(quote => (
+                        <Quote key={quote.id} quoteAuthor={quote} />
                     ))
             }
             <Pagination pagination={pagination} setPageNumber={setPageNumber} maxPageNumberLimit={maxPageNumberLimit} minPageNumberLimit={minPageNumberLimit} pageNumberLimit={pageNumberLimit}/>
-            <button onClick={() => setRandomQuotePageFocus(true)}>Back to the random quote generator</button>
+            <button onClick={() => {
+                setText("")
+                setRandomQuotePageFocus(true)}}>Back to the random quote generator</button>
         </div>
     )
 }

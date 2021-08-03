@@ -3,6 +3,7 @@ import getRandomQuote from "./helpers/getRandomQuote";
 import "./App.css";
 import SingleQuote from "./components/SingleQuote";
 import getAllAuthorQuotes from "./helpers/getAllAuthorQuotes";
+import getQueryResult from "./helpers/getQueryResult"
 import AllAuthorQuotes from "./components/AllAuthorQuotes";
 
 const initialQuote = {
@@ -33,12 +34,32 @@ const initialPagination = {
   totalPages: 1,
 };
 
+const initialAllQuerySearchQuotes = [
+  {
+    author: "Johnny Depp",
+    genre: "Action",
+    text: "Hey, hey, hey",
+    id: "29sgds257298dee",
+  },
+  {
+    author: "Johnny Depp",
+    genre: "Action",
+    text: "Huy, huy, huy",
+    id: "29sgds25dd7298gsd",
+  },
+];
+
 function App() {
   const [quote, setQuote] = useState(initialQuote);
   const [loading, setLoading] = useState(true); //Control when a request is loading
   const [allAuthorQuotes, setAllAuthorQuotes] = useState(
     initialAllAuthorQuotes
   );
+
+  const [text, setText] = useState("")
+  const [allQuerySearchQuotes, setAllQuerySearchQuotes] = useState(initialAllQuerySearchQuotes)
+  const [querySearchPageFocus, setQuerySearchPageFocus] = useState(false)
+
   const [randomQuotePageFocus, setRandomQuotePageFocus] = useState(true); // Control when we change from randomQuotePage to allAuthorQuotesPage
   const [pagination, setPagination] = useState(initialPagination);
   const [pageNumber, setPageNumber] = useState(1);
@@ -64,6 +85,30 @@ function App() {
       setMinPageNumberLimit(minPageNumberLimit - pageNumberLimit);
     }
   }, [pageNumber, maxPageNumberLimit, minPageNumberLimit, pageNumberLimit]);
+
+
+  // Send a request every time text changes
+  useEffect(() => {
+    const updateQueryResult = () =>{
+      if (text === ""){
+        setRandomQuotePageFocus(true)
+        setQuerySearchPageFocus(false)
+  
+      }else{
+        setRandomQuotePageFocus(false);
+        setQuerySearchPageFocus(true)
+        getQueryResult(text).then((data) => {
+          const newArray = data.data;
+          setPagination(data.pagination);
+          setAllQuerySearchQuotes(() => generateNewAllAuthorQuotesArray(newArray));
+        })
+      }
+    }
+
+    updateQueryResult()
+  }, [text])
+
+  
 
   // useEffect(() =>{
   //   updateAllAuthorQuotes(pageNumber)
@@ -91,16 +136,7 @@ function App() {
     [quote.author]
   );
 
-  // const changePageNumber = number =>{
-  //   setPageNumber(number)
-  //   updateAllAuthorQuotes(pageNumber)
-  // }
 
-  // Move to another page
-  // const updateCurrentlyPageNumber = number =>{
-  //   setPageNumber(number)
-  //   updateAllAuthorQuotes(pageNumber)
-  // }
 
   // Generate new array with the author quotes and the right property's name
   function generateNewAllAuthorQuotesArray(array) {
@@ -114,9 +150,12 @@ function App() {
     return newAllAuthorQuotesArray;
   }
 
+
+
   return (
     <div className="App">
       <h1>Random Quote Generator</h1>
+      <input type="text" value={text} onChange={e => setText(e.target.value)}></input>
       {randomQuotePageFocus ? (
         <SingleQuote
           quote={quote}
@@ -137,6 +176,9 @@ function App() {
           maxPageNumberLimit={maxPageNumberLimit}
           minPageNumberLimit={minPageNumberLimit}
           pageNumberLimit={pageNumberLimit}
+          querySearchPageFocus={querySearchPageFocus}
+          allQuerySearchQuotes={allQuerySearchQuotes}
+          setText={setText}
         />
       )}
 
