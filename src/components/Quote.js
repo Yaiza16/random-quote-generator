@@ -1,6 +1,10 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 
 function Quote({quote, quoteAuthor, randomQuotePageFocus}) {
+    useEffect(() =>{
+        console.log('Quote render')
+    },[])
+
     return (
         <div>
             <p>{randomQuotePageFocus ? quote.text : quoteAuthor.text}</p>

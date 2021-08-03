@@ -1,11 +1,14 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 
 export default function Pagination({pagination, setPageNumber, maxPageNumberLimit, minPageNumberLimit, pageNumberLimit}) {
     // const [pageNumberLimit, setPageNumberLimit] = useState(5)
     // const [maxPageNumberLimit, setMaxPageNumberLimit] = useState(5)
     // const [minPageNumberLimit, setMinPageNumberLimit] = useState(1)
+    useEffect(() =>{
+        console.log('Pagination render')
+    }, [])
 
-    console.log('Render pagination component')
+    // console.log('Render pagination component')
     const pageNumbers = []
 
     if (pagination.totalPages > 1){
@@ -19,7 +22,7 @@ export default function Pagination({pagination, setPageNumber, maxPageNumberLimi
     // console.log(pageNumbers)
     // console.log(pagination)
     // console.log(pageNumbers.length)
-    console.log("Currente page: " + pagination.currentPage)
+    // console.log("Currente page: " + pagination.currentPage)
     // console.log(pagination.totalPages)
 
     return (

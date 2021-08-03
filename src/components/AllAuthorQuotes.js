@@ -4,7 +4,11 @@ import Spinner from './Spinner'
 import Pagination from './Pagination'
 
 function AllAuthorQuotes({allAuthorQuotes, loading, setRandomQuotePageFocus, pagination, setPageNumber, pageNumber, updateAllAuthorQuotes, maxPageNumberLimit, minPageNumberLimit, pageNumberLimit}) {
-    // console.log('AllAuthorQuotes runs')
+    
+    useEffect(() =>{
+        console.log('AllAuthorQuotes render')
+    }, [])
+
 
     useEffect(() =>{
         updateAllAuthorQuotes(pageNumber)

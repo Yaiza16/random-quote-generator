@@ -1,12 +1,12 @@
 const getAllAuthorQuotes = async (authorName, setLoading, pageNumber) =>{
     // Set loader
     setLoading(true)
-    console.log('Page number:' + pageNumber)
+    // console.log('Page number:' + pageNumber)
     const url = `https://quote-garden.herokuapp.com/api/v3/quotes?author=${authorName}&limit=3&page=${pageNumber}`
     const res = await fetch(url)
     const data = await res.json();
     // const newQuote = await data.data;
-    console.log(data.totalQuotes)
+    // console.log(data.totalQuotes)
 
     // const allQuotes = newQuote.map(quote =>(
     //     {
