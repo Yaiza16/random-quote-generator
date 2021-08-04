@@ -2,6 +2,7 @@ import React, {useEffect} from 'react'
 import Quote from './Quote'
 import Spinner from './Spinner'
 import Pagination from './Pagination'
+import './AllAuthorQuotes.css';
 
 function AllAuthorQuotes({allAuthorQuotes, loading, setRandomQuotePageFocus, pagination, setPageNumber, pageNumber, updateAllAuthorQuotes, maxPageNumberLimit, minPageNumberLimit, pageNumberLimit, querySearchPageFocus, allQuerySearchQuotes, setText, querySearchQuotesNull}) {
     
@@ -21,7 +22,13 @@ function AllAuthorQuotes({allAuthorQuotes, loading, setRandomQuotePageFocus, pag
 
 
     if (querySearchQuotesNull){
-        return <i>No data found</i>
+        return (
+            <>
+                <i className="no-data-message">No data found</i>
+                <button className="general-button" onClick={() => {
+                    setText("")
+                    setRandomQuotePageFocus(true)}}>Back to the random quote generator</button>
+            </>)
     }
 
     else{
