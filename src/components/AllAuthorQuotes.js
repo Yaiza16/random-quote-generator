@@ -19,21 +19,29 @@ function AllAuthorQuotes({allAuthorQuotes, loading, setRandomQuotePageFocus, pag
                     ? varUsed = allQuerySearchQuotes
                     : varUsed= allAuthorQuotes
 
-    return (
-        <>
-            {
-                loading 
-                    ? <Spinner />
-                    :   varUsed.map(quote => (
-                        <Quote key={quote.id} quoteAuthor={quote} querySearchPageFocus={querySearchPageFocus} querySearchQuotesNull={querySearchQuotesNull} />
-                    ))
-            }
-            <Pagination pagination={pagination} setPageNumber={setPageNumber} maxPageNumberLimit={maxPageNumberLimit} minPageNumberLimit={minPageNumberLimit} pageNumberLimit={pageNumberLimit}/>
-            <button className="general-button" onClick={() => {
-                setText("")
-                setRandomQuotePageFocus(true)}}>Back to the random quote generator</button>
-        </>
-    )
+
+    if (querySearchQuotesNull){
+        return <i>No data found</i>
+    }
+
+    else{
+        return (
+            <>
+                {
+                    loading 
+                        ? <Spinner />
+                        :   varUsed.map(quote => (
+                            <Quote key={quote.id} quoteAuthor={quote} querySearchPageFocus={querySearchPageFocus} querySearchQuotesNull={querySearchQuotesNull} />
+                        ))
+                }
+                <Pagination pagination={pagination} setPageNumber={setPageNumber} maxPageNumberLimit={maxPageNumberLimit} minPageNumberLimit={minPageNumberLimit} pageNumberLimit={pageNumberLimit}/>
+                <button className="general-button" onClick={() => {
+                    setText("")
+                    setRandomQuotePageFocus(true)}}>Back to the random quote generator</button>
+            </>
+        )
+}
+    
 }
 
 export default AllAuthorQuotes
