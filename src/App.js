@@ -52,27 +52,36 @@ const initialAllQuerySearchQuotes = [
 function App() {
   const [quote, setQuote] = useState(initialQuote);
   const [loading, setLoading] = useState(true); //Control when a request is loading
+
+  // Author quotes
   const [allAuthorQuotes, setAllAuthorQuotes] = useState(
     initialAllAuthorQuotes
   );
 
+  // Search input
   const [text, setText] = useState("")
   const [allQuerySearchQuotes, setAllQuerySearchQuotes] = useState(initialAllQuerySearchQuotes)
-  const [querySearchPageFocus, setQuerySearchPageFocus] = useState(false)
+  const [querySearchPageFocus, setQuerySearchPageFocus] = useState(false) 
   const [querySearchQuotesNull, setQuerySearchQuotesNull] = useState(false)
 
+  // Random quote
   const [randomQuotePageFocus, setRandomQuotePageFocus] = useState(true); // Control when we change from randomQuotePage to allAuthorQuotesPage
   const [pagination, setPagination] = useState(initialPagination);
   const [pageNumber, setPageNumber] = useState(1);
 
-  const [pageNumberLimit, setPageNumberLimit] = useState(5);
+  // Pagination
+  const [pageNumberLimit] = useState(5);
   const [maxPageNumberLimit, setMaxPageNumberLimit] = useState(5);
   const [minPageNumberLimit, setMinPageNumberLimit] = useState(1);
+
+
 
   // Update random quote once after the initial rendering
   useEffect(() => {
     updateRandomQuote();
   }, []);
+
+
 
   // Every time pageNumber changes, check if the new pageNumber is printed in the pagination.
   useEffect(() => {
@@ -87,6 +96,7 @@ function App() {
     }
   }, [pageNumber, maxPageNumberLimit, minPageNumberLimit, pageNumberLimit]);
 
+  
 
   // Send a request every time text changes
   useEffect(() => {
@@ -100,7 +110,7 @@ function App() {
         setQuerySearchPageFocus(true)
         getQueryResult(text).then((data) => {
           const newArray = data.data;
-          data.totalQuotes===0 ? setQuerySearchQuotesNull(true) : setQuerySearchQuotesNull(false)
+          data.totalQuotes === 0 ? setQuerySearchQuotesNull(true) : setQuerySearchQuotesNull(false)
           setPagination(data.pagination);
           setAllQuerySearchQuotes(() => generateNewAllAuthorQuotesArray(newArray));
         })
@@ -110,11 +120,7 @@ function App() {
     updateQueryResult()
   }, [text])
 
-  
 
-  // useEffect(() =>{
-  //   updateAllAuthorQuotes(pageNumber)
-  // }, [pageNumber])
 
   // Receive random quote request
   const updateRandomQuote = () => {
@@ -124,6 +130,8 @@ function App() {
       setQuote(data);
     });
   };
+
+
 
   // Receive all author quotes request
   const updateAllAuthorQuotes = useCallback(
@@ -149,12 +157,6 @@ function App() {
       genre: quote.quoteGenre,
       text: quote.quoteText,
     }));
-
-    // const newAllAuthorQuotesArray = array.map((quote) => (
-    //   {_id:id, quoteAuthor:author, guoteGenre:genre, quoteText:text} = quote
-    
-    //   ));
-    // console.log(newAllAuthorQuotesArray)
 
     return newAllAuthorQuotesArray;
   }
@@ -196,9 +198,6 @@ function App() {
         />
       )}
       </section>
-
-      {/* <button onClick={() => updateRandomQuote()}>Generate another random quote</button> */}
-      {/* <button onClick={() => updateAllAuthorQuotes()}>Show all quotes by {quote.author}</button> */}
     </div>
   );
 }
