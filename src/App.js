@@ -59,6 +59,7 @@ function App() {
   const [text, setText] = useState("")
   const [allQuerySearchQuotes, setAllQuerySearchQuotes] = useState(initialAllQuerySearchQuotes)
   const [querySearchPageFocus, setQuerySearchPageFocus] = useState(false)
+  const [querySearchQuotesNull, setQuerySearchQuotesNull] = useState(false)
 
   const [randomQuotePageFocus, setRandomQuotePageFocus] = useState(true); // Control when we change from randomQuotePage to allAuthorQuotesPage
   const [pagination, setPagination] = useState(initialPagination);
@@ -99,6 +100,7 @@ function App() {
         setQuerySearchPageFocus(true)
         getQueryResult(text).then((data) => {
           const newArray = data.data;
+          data.totalQuotes===0 ? setQuerySearchQuotesNull(true) : setQuerySearchQuotesNull(false)
           setPagination(data.pagination);
           setAllQuerySearchQuotes(() => generateNewAllAuthorQuotesArray(newArray));
         })
@@ -131,6 +133,7 @@ function App() {
         const newArray = data.data;
         setPagination(data.pagination);
         setAllAuthorQuotes(() => generateNewAllAuthorQuotesArray(newArray));
+        console.log(newArray[0])
       });
     },
     [quote.author]
@@ -147,6 +150,12 @@ function App() {
       text: quote.quoteText,
     }));
 
+    // const newAllAuthorQuotesArray = array.map((quote) => (
+    //   {_id:id, quoteAuthor:author, guoteGenre:genre, quoteText:text} = quote
+    
+    //   ));
+    // console.log(newAllAuthorQuotesArray)
+
     return newAllAuthorQuotesArray;
   }
 
@@ -156,7 +165,7 @@ function App() {
     <div className="App">
       <header className="header">
         <h1 className="header-title">Random Quote Generator</h1>
-        <input type="text" value={text} onChange={e => setText(e.target.value)}></input>
+        <input type="text" placeholder="Write your text here..." value={text} onChange={e => setText(e.target.value)}></input>
       </header>
       
       <section className="main">
@@ -182,6 +191,7 @@ function App() {
           pageNumberLimit={pageNumberLimit}
           querySearchPageFocus={querySearchPageFocus}
           allQuerySearchQuotes={allQuerySearchQuotes}
+          querySearchQuotesNull={querySearchQuotesNull}
           setText={setText}
         />
       )}

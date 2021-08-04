@@ -1,5 +1,15 @@
 
 .card{
-    max-width: 15rem;
-    border: 1px solid black;
+    width: 80%;
+    font-size: 36px;
+    padding: 0 3rem;
+    border-left: 4px solid #F7DF94;
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.card-author{
+    font-size: 25px;
 }

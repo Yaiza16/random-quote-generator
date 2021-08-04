@@ -1,0 +1,44 @@
+ul{
+    list-style: none;
+    display: flex;
+}
+
+.button-pagination{
+    font-size: 20px;
+    padding: 5px;
+    border-radius: 2px;
+    background-color: rgb(219, 219, 219);
+    border: none;
+    cursor: pointer;
+}
+
+.pagination-numbers{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 2rem;
+}
+
+.page-number{
+    width: 35px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+}
+
+.page-number--selected{
+    border-bottom: 2px solid black;
+    border-radius: 50%;
+}
+
+.page-number-link{
+    text-decoration: none;
+    font-size: 25px;
+    color: black;
+}
+
+.page-number-link--selected{
+    cursor: context-menu;
+}
