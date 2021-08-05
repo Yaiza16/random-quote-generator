@@ -3,7 +3,8 @@
     width: 80%;
     font-size: 36px;
     padding: 0 3rem;
-    border-left: 4px solid #F7DF94;
+    border-left: 7px solid #F7DF94;
+    border-radius: 8px;
     margin-bottom: 2rem;
     display: flex;
     flex-direction: column;
