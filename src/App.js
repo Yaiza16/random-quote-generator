@@ -114,7 +114,7 @@ function App() {
         setPageNumber(1)
       } 
 
-      else if(text.length == 1){
+      else if(text.length === 1){
         setPageNumber(1)
       }
 
@@ -124,10 +124,8 @@ function App() {
         getQueryResult(text, optionValue, setLoading, pageNumber).then((data) => {
           const newArray = data.data;
           data.totalQuotes === 0 ? setQuerySearchQuotesNull(true) : setQuerySearchQuotesNull(false)
-          console.log(data.pagination)
 
           setPagination(data.pagination);
-          console.log(data.pagination)
 
           setAllQuerySearchQuotes(() => generateNewAllAuthorQuotesArray(newArray));
         })
@@ -135,7 +133,7 @@ function App() {
     }
 
     updateQueryResult()
-  }, [text, optionValue, pageNumber])
+  }, [text, optionValue, randomQuotePageFocus, pageNumber])
 
 
 
@@ -162,7 +160,7 @@ function App() {
       });
      }
     },
-    [quote.author, pageNumber]
+    [quote.author, querySearchPageFocus, pageNumber]
   );
 
 

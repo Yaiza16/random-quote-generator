@@ -1,8 +1,3 @@
-
-<!-- Please update value in the {} -->
-
-  
-
 <h1  align="center">Random Quote Generator</h1>
 
   
@@ -45,30 +40,17 @@ Challenge
 
 </div>
 
-  
 
-<!-- TABLE OF CONTENTS -->
-
-  
 
 ## Table of Contents
-
-  
-
 -  [Overview](#overview)
-- [Features](#features)
-
+-  [Features](#features)
 -  [Built With](#built-with)
-
 -  [Contact](#contact)
 
 
   
-
 ## Overview
-
-  
-
 ![Gif for the random quote generator](./result/random-quote-generator.gif)
 
 
@@ -82,6 +64,8 @@ That is my first project using `React`. Although my main idea was to replicate t
 I wanted to focus on functional components and practice on that, so the app style doesn't exactly look like the design.
 
 Spinner loader is from [loading.io](https://loading.io/css)
+
+
 
 ### Built With
 -  React
