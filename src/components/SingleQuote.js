@@ -4,7 +4,6 @@ import Spinner from './Spinner'
 import './SingleQuote.css'
 
 function SingleQuote({quote, loading, randomQuotePageFocus, updateRandomQuote, updateAllAuthorQuotes}) {
-    // console.log('SingleQuote runs')
     return (
         <>
             {

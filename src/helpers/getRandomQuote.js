@@ -1,6 +1,7 @@
 const getRandomQuote = async (setLoading) =>{
     // Set loader
     setLoading(true)
+
     const url = 'https://quote-garden.herokuapp.com/api/v3/quotes/random'
     const res = await fetch(url)
     const data = await res.json();
@@ -17,6 +18,7 @@ const getRandomQuote = async (setLoading) =>{
 
     //Set loader
     setLoading(false)
+    
     return singleQuote
 }
 

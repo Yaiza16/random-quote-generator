@@ -4,8 +4,6 @@ import './Quote.css'
 
 function Quote({quote, quoteAuthor, randomQuotePageFocus, querySearchQuotesNull}) {
     
-    querySearchQuotesNull ? console.log('is true') : console.log('is false')
-
     return (
         <div className="card">
             <p className="card-quote">{randomQuotePageFocus 

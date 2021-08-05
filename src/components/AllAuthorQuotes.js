@@ -5,16 +5,11 @@ import Pagination from './Pagination'
 import './AllAuthorQuotes.css';
 
 function AllAuthorQuotes({allAuthorQuotes, loading, setRandomQuotePageFocus, pagination, setPageNumber, pageNumber, updateAllAuthorQuotes, maxPageNumberLimit, minPageNumberLimit, pageNumberLimit, querySearchPageFocus, allQuerySearchQuotes, setText, querySearchQuotesNull}) {
-    
-    useEffect(() =>{
-        console.log('varUsed')
-    }, [])
-
-
     useEffect(() =>{
         updateAllAuthorQuotes(pageNumber)
     },[pageNumber, updateAllAuthorQuotes])
 
+    
     let varUsed;
     querySearchPageFocus
                     ? varUsed = allQuerySearchQuotes
