@@ -1,41 +1,15 @@
 <h1  align="center">Random Quote Generator</h1>
-
-  
-
 <div  align="center">
-
 Solution for a challenge from <a  href="http://devchallenges.io"  target="_blank">Devchallenges.io</a>.
-
 </div>
 
-  
-
 <div  align="center">
-
 <h3>
-
-<a  href="https://{your-demo-link.your-domain}">
-
-Demo
-
-</a>
-
+<a  href="https://random-quote-generator-yv.netlify.app/">Demo</a>
 <span> | </span>
-
-<a  href="https://{your-url-to-the-solution}">
-
-Solution
-
-</a>
-
+<a  href="https://devchallenges.io/solutions/HowamCcNOY3klZkjsx75">Solution</a>
 <span> | </span>
-
-<a  href="https://devchallenges.io/challenges/8Y3J4ucAMQpSnYTwwWW8">
-
-Challenge
-
-</a>
-
+<a  href="https://devchallenges.io/challenges/8Y3J4ucAMQpSnYTwwWW8">Challenge</a>
 </h3>
 
 </div>
