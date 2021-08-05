@@ -46,6 +46,8 @@ export default function Pagination({pagination, setPageNumber, maxPageNumberLimi
         const pageNumbers = []
 
         if (pagination.totalPages > 1){
+            console.log(minPageNumberLimit)
+            console.log(maxPageNumberLimit)
             for(let i = minPageNumberLimit; i <= maxPageNumberLimit; i++){
                 console.log('Total pagination: ' +pagination.totalPages)
                 if (i <= pagination.totalPages){
@@ -56,7 +58,7 @@ export default function Pagination({pagination, setPageNumber, maxPageNumberLimi
             }
         }
 
-        const pageNumbersShowed = pageNumbers.filter(pageNumber => pageNumber <= maxPageNumberLimit && pageNumber >= minPageNumberLimit)
+        // const pageNumbersShowed = pageNumbers.filter(pageNumber => pageNumber <= maxPageNumberLimit && pageNumber >= minPageNumberLimit)
         console.log(pageNumbers)
         console.log(pageNumbers.length)
         return pageNumbers

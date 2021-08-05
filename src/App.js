@@ -112,12 +112,15 @@ function App() {
         setRandomQuotePageFocus(true)
         setQuerySearchPageFocus(false)
         setPageNumber(1)
-  
-        
-      }else{
+      } 
+
+      else if(text.length == 1){
+        setPageNumber(1)
+      }
+
+      else{
         setRandomQuotePageFocus(false);
         setQuerySearchPageFocus(true)
-        setPageNumber(1)
         getQueryResult(text, optionValue, setLoading, pageNumber).then((data) => {
           const newArray = data.data;
           data.totalQuotes === 0 ? setQuerySearchQuotesNull(true) : setQuerySearchQuotesNull(false)
@@ -175,8 +178,6 @@ function App() {
 
     return newAllAuthorQuotesArray;
   }
-
-  
 
 
   // Set optionValue
