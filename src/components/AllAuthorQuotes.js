@@ -44,7 +44,8 @@ function AllAuthorQuotes({allAuthorQuotes, loading, setRandomQuotePageFocus, pag
                 <Pagination pagination={pagination} setPageNumber={setPageNumber} maxPageNumberLimit={maxPageNumberLimit} minPageNumberLimit={minPageNumberLimit} pageNumberLimit={pageNumberLimit}/>
                 <button className="general-button" onClick={() => {
                     setText("")
-                    setRandomQuotePageFocus(true)}}>Back to the random quote generator</button>
+                    setRandomQuotePageFocus(true)
+                    setPageNumber(1)}}>Back to the random quote generator</button>
             </>
         )
 }

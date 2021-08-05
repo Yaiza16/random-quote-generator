@@ -100,29 +100,39 @@ function App() {
     }
   }, [pageNumber, maxPageNumberLimit, minPageNumberLimit, pageNumberLimit]);
 
-  
 
   // Send a request every time text changes
   useEffect(() => {
     const updateQueryResult = () =>{
-      if (text === ""){
+      if (text==="" && !randomQuotePageFocus){
+        setQuerySearchPageFocus(false)
+
+      }
+      else if (text === ""){
         setRandomQuotePageFocus(true)
         setQuerySearchPageFocus(false)
+        setPageNumber(1)
   
+        
       }else{
         setRandomQuotePageFocus(false);
         setQuerySearchPageFocus(true)
-        getQueryResult(text, optionValue).then((data) => {
+        setPageNumber(1)
+        getQueryResult(text, optionValue, setLoading, pageNumber).then((data) => {
           const newArray = data.data;
           data.totalQuotes === 0 ? setQuerySearchQuotesNull(true) : setQuerySearchQuotesNull(false)
+          console.log(data.pagination)
+
           setPagination(data.pagination);
+          console.log(data.pagination)
+
           setAllQuerySearchQuotes(() => generateNewAllAuthorQuotesArray(newArray));
         })
       }
     }
 
     updateQueryResult()
-  }, [text, optionValue])
+  }, [text, optionValue, pageNumber])
 
 
 
@@ -139,17 +149,17 @@ function App() {
 
   // Receive all author quotes request
   const updateAllAuthorQuotes = useCallback(
-    (pageNumber) => {
+    () => {
+     if (!querySearchPageFocus){
       setRandomQuotePageFocus(false);
       getAllAuthorQuotes(quote.author, setLoading, pageNumber).then((data) => {
         const newArray = data.data;
         setPagination(data.pagination);
-        console.log(newArray)
         setAllAuthorQuotes(() => generateNewAllAuthorQuotesArray(newArray));
-        console.log(newArray[0])
       });
+     }
     },
-    [quote.author]
+    [quote.author, pageNumber]
   );
 
 
@@ -165,6 +175,8 @@ function App() {
 
     return newAllAuthorQuotesArray;
   }
+
+  
 
 
   // Set optionValue
