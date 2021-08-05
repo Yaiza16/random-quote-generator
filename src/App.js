@@ -182,7 +182,7 @@ function App() {
             <option value="text">Text</option>
             <option value="author">Author</option>
           </select>
-          <input className="query-input" type="text" placeholder="Write your text here..." value={text} onChange={e => setText(e.target.value)} ></input>
+          <input className="query-input" type="text" placeholder="Write your query here..." value={text} onChange={e => setText(e.target.value)} ></input>
         </div>
       </header>
       
