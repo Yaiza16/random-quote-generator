@@ -22,7 +22,7 @@
   padding-top: 2rem;
 }
 
-input{
+.query-input{
   width: 50%;
   font-size: 20px;
   padding: 10px;

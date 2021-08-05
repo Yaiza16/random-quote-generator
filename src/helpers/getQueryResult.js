@@ -1,10 +1,29 @@
-const getQueryResult = async (query) =>{
+const getQueryResult = async (query, optionValue) =>{
 
-    const url = `https://quote-garden.herokuapp.com/api/v3/quotes?query=${query}&limit=3`
-    const res = await fetch(url)
-    const data = await res.json();
+    optionValue === 'text' ? console.log('Is text') : console.log('Is author')
 
-    return data
+    if (optionValue === 'text'){
+        const url = `https://quote-garden.herokuapp.com/api/v3/quotes?query=${query}&limit=3`
+        const res = await fetch(url)
+        const data = await res.json();
+        return data;
+    }else{
+        const url = `https://quote-garden.herokuapp.com/api/v3/quotes?author=${query}&limit=3`
+        const res = await fetch(url)
+        const data = await res.json();
+        return data;
+    }
+
 }
+
+
+// const getQueryResult = async (query, optionValue) =>{
+
+//     const url = `https://quote-garden.herokuapp.com/api/v3/quotes?query=${query}&limit=3`
+//     const res = await fetch(url)
+//     const data = await res.json();
+
+//     return data
+// }
 
 export default getQueryResult

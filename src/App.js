@@ -49,6 +49,7 @@ const initialAllQuerySearchQuotes = [
   },
 ];
 
+
 function App() {
   const [quote, setQuote] = useState(initialQuote);
   const [loading, setLoading] = useState(true); //Control when a request is loading
@@ -57,6 +58,10 @@ function App() {
   const [allAuthorQuotes, setAllAuthorQuotes] = useState(
     initialAllAuthorQuotes
   );
+
+  // Value Options
+  const [optionValue, setOptionValue] = useState('text')
+
 
   // Search input
   const [text, setText] = useState("")
@@ -108,7 +113,7 @@ function App() {
       }else{
         setRandomQuotePageFocus(false);
         setQuerySearchPageFocus(true)
-        getQueryResult(text).then((data) => {
+        getQueryResult(text, optionValue).then((data) => {
           const newArray = data.data;
           data.totalQuotes === 0 ? setQuerySearchQuotesNull(true) : setQuerySearchQuotesNull(false)
           setPagination(data.pagination);
@@ -140,6 +145,7 @@ function App() {
       getAllAuthorQuotes(quote.author, setLoading, pageNumber).then((data) => {
         const newArray = data.data;
         setPagination(data.pagination);
+        console.log(newArray)
         setAllAuthorQuotes(() => generateNewAllAuthorQuotesArray(newArray));
         console.log(newArray[0])
       });
@@ -162,12 +168,22 @@ function App() {
   }
 
 
+  // Set optionValue
+  const handleChangeOptionValue = e =>{
+    setOptionValue(e.target.value)
+  }
+
 
   return (
     <div className="App">
       <header className="header">
         <h1 className="header-title">Random Quote Generator</h1>
-        <input type="text" placeholder="Write your text here..." value={text} onChange={e => setText(e.target.value)}></input>
+        <select value={optionValue} onChange={e => handleChangeOptionValue(e)}>
+          <option value="text">Text</option>
+          <option value="author">Author</option>
+
+        </select>
+        <input className="query-input" type="text" placeholder="Write your text here..." value={text} onChange={e => setText(e.target.value)}></input>
       </header>
       
       <section className="main">
