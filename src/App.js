@@ -87,7 +87,6 @@ function App() {
   }, []);
 
 
-
   // Every time pageNumber changes, check if the new pageNumber is printed in the pagination.
   useEffect(() => {
     if (pageNumber > maxPageNumberLimit) {
@@ -123,7 +122,7 @@ function App() {
     }
 
     updateQueryResult()
-  }, [text])
+  }, [text, optionValue])
 
 
 
@@ -178,12 +177,13 @@ function App() {
     <div className="App">
       <header className="header">
         <h1 className="header-title">Random Quote Generator</h1>
-        <select value={optionValue} onChange={e => handleChangeOptionValue(e)}>
-          <option value="text">Text</option>
-          <option value="author">Author</option>
-
-        </select>
-        <input className="query-input" type="text" placeholder="Write your text here..." value={text} onChange={e => setText(e.target.value)}></input>
+        <div className="query-search-container">
+          <select className="query-options" value={optionValue} onChange={e => handleChangeOptionValue(e)}>
+            <option value="text">Text</option>
+            <option value="author">Author</option>
+          </select>
+          <input className="query-input" type="text" placeholder="Write your text here..." value={text} onChange={e => setText(e.target.value)} ></input>
+        </div>
       </header>
       
       <section className="main">
